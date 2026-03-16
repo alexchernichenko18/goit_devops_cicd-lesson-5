@@ -29,3 +29,9 @@ data "aws_iam_policy_document" "ecr_repo_policy" {
     ]
   }
 }
+
+# 3. Прив'язка політики до репозиторію
+resource "aws_ecr_repository_policy" "this" {
+  repository = aws_ecr_repository.this.name
+  policy     = data.aws_iam_policy_document.ecr_repo_policy.json
+}
